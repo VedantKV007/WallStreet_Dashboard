@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Stock Market Dashboard</title>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="styleDB.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Stock Market Dashboard</h1>
+
+
+    <div class="alert alert-danger" th:if="${error}">
+        <p th:text="${error}"></p>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title">S&P 500 (SPY)</h5>
+                    <p class="card-text" th:text="${sp500Price}">Loading...</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title">NASDAQ-100 (QQQ)</h5>
+                    <p class="card-text" th:text="${nasdaqPrice}">Loading...</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Dow Jones (DIA)</h5>
+                    <p class="card-text" th:text="${dowJonesPrice}">Loading...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="mt-5">
+        <h2>Search for Stocks</h2>
+        <form th:action="@{/searchStock}" method="get" class="form-inline justify-content-center">
+            <input type="text" name="symbol" class="form-control mr-2" placeholder="Enter Stock Symbol" required>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+
+
+        <div class="mt-4 text-center" th:if="${symbol != null}">
+            <h5>Stock: <span th:text="${symbol}"></span></h5>
+            <h6>Price: <span th:text="${price}"></span></h6>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
